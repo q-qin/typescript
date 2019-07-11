@@ -1,4 +1,4 @@
-# boss-admin
+# 这是一个typescript vue项目
 
 ## Project setup
 ```
