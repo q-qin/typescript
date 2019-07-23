@@ -6,28 +6,19 @@
       </router-link>
     </yd-navbar>-->
     <router-view/>
-    <yd-tabbar slot="tabbar" active-color="#498cea" padding=".2rem" fontsize="12px">
-      <yd-tabbar-item title="首页" @click.capture.native="()=>{}">
-        <span name="home" class="iconfont b iconicon_home_normal" slot="icon"></span>
+    <yd-tabbar slot="tabbar" active-color="#0bb20c" padding=".2rem" fontsize="12px">
+      <yd-tabbar-item title="首页" link="/" :active="activepath=='/'">
+        <span name="home" class="iconfont b icon-ziyouhuodong" slot="icon"></span>
       </yd-tabbar-item>
-      <yd-tabbar-item title="仪表盘" link="/dash" :active="activepath=='/dash'">
+      <yd-tabbar-item title="发现" link="/list" :active="activepath=='/list'">
         <span
           name="home"
-          class="iconfont b"
+          class="iconfont b icon-hongbao"
           slot="icon"
-          :class="activepath=='/dash'?'iconicon_dashboard_selected':'iconicon_dashboard_nomal'"
         ></span>
       </yd-tabbar-item>
-      <yd-tabbar-item title="合作机构" link="/cooperator" :active="activepath=='/cooperator'">
-        <span
-          name="home"
-          class="iconfont b"
-          slot="icon"
-          :class="activepath=='/cooperator'?'iconicon_partner_selected':'iconicon_partner_normal'"
-        ></span>
-      </yd-tabbar-item>
-      <yd-tabbar-item title="我的" @click.capture.native="()=>{}">
-        <span name="home" class="iconfont b iconicon_me_nomal" slot="icon"></span>
+      <yd-tabbar-item title="我的" @click.capture.native="$dialog.alert({mes:'敬请期待'})">
+        <span name="home" class="iconfont b icon-ziyuan" slot="icon"></span>
       </yd-tabbar-item>
     </yd-tabbar>
   </yd-layout>
@@ -51,7 +42,4 @@ export default class ComponentName extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.footnav {
-  color: #498cea;
-}
 </style>

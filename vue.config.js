@@ -1,6 +1,5 @@
-const proxyTarget = 'http://erp-system.mofangge.net/api'	// 测试
-// const proxyTarget = "http://dev-erp-manage.mofangge.cc/api"; // 开发环境
-//const proxyTarget = "http://172.16.40.69:7117"; // lzz
+const proxyTarget = 'http://dev.3keji.com/api'	// 开发环境
+// const proxyTarget = "http://ts.3keji.com/api"; // 测试
 const proxy = {
   "/merchant": {
     target: proxyTarget,

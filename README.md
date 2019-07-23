@@ -1,34 +1,22 @@
-# 这是一个typescript vue项目
+# 基于vue-cli 3.0脚手架写的typescript项目[线上访问地址](http://ts.3keji.com/)
 
-## Project setup
-```
+## 
+``` bash
+# 安装依赖
 npm install
-```
+OR
+yarn 
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+# 开启本地服务器localhost:8091
+npm run serve --port 8091
+OR
+yarn serve --port 8091
 
-### Compiles and minifies for production
-```
+# 项目打包(依赖/正式/测试/同时)
+npm run dll
 npm run build
-```
+OR
+yarn dll
+yarn build
 
-### Run your tests
 ```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-// 17f52327fe28128fb44bb28dcf308b73bea0586c
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

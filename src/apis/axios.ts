@@ -4,17 +4,14 @@ import { session } from "@/utils/store";
 // @ts-ignore
 import { Toast } from "vue-ydui/dist/lib.rem/dialog";
 const instance = axios.create();
+//可能出现多个端不同接口地址
 const Root: Host = {
-  "boss.mofangge.cc": "http://dev-erp-manage.mofangge.cc", //开发
-  "boss.mofangge.net": "http://erp-system.mofangge.net", //测试
-  "school.yingmengai.com": "https://admin.yingmengai.com", //预发布
-  "school.ymsteam.com": "https://admin.ymsteam.com" //正式
+  "a.3keji.com": "http://a.3keji.com",
+  "b.3keji.com": "http://b.3keji.com", 
 };
 interface Host {
-  "boss.mofangge.cc": string;
-  "boss.mofangge.net": string;
-  "school.yingmengai.com": string;
-  "school.ymsteam.com": string;
+  "a.3keji.com": string;
+  "b.3keji.com": string;
 }
 const rootApi: string = Root[<keyof Host>window.location.host];
 instance.defaults.baseURL =

@@ -66,7 +66,7 @@ input {
   width: 100%;
   height: 100%;
   background-color: transparent;
-  caret-color: #0079ff;
+  caret-color: #0bb20c;
 }
 .inputborder {
   height: 45px;
@@ -76,6 +76,6 @@ input {
   border: 1px solid rgba(216, 216, 216, 1);
 }
 .acitveborder {
-  border: 1px solid #3087ff;
+  border: 1px solid #0bb20c;
 }
 </style>

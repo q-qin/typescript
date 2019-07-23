@@ -5,15 +5,7 @@ import axios from "./axios";
  * @returns {*}
  */
 export function sendCode(mobile: string) {
-  return axios.get(`common/message/sendmessagecode/${mobile}/4`);
-}
-// /**
-//  * 检查手机号是否存在
-//  * @param mobile
-//  * @returns {*}
-//  */
-export function checkphone(mobileNumber: string): Promise<[]> {
-  return axios.post(`merchant/oauth/bossreport/uservalidate/${mobileNumber}`);
+  return axios.get(`common/sendmessagecode/${mobile}`);
 }
 /**
  * 使用短信验证码登录
@@ -43,11 +35,3 @@ export function login(data: {
   return axios.post(`merchant/cloud/login`, data);
 }
 
-/**
- * 获取菜单权限id
- * @param mobile
- * @returns {*}
- */
-export function getSystemId(userId: number): Promise<[]> {
-  return axios.get(`user/system/user/${userId}`);
-}

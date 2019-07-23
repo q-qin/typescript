@@ -1,5 +1,5 @@
 {
-  "name": "boss-admin",
+  "name": "tsproject",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -33,7 +33,6 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@types/echarts": "^4.1.9",
     "@types/jest": "^23.1.4",
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-typescript": "^3.8.0",

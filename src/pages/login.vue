@@ -5,10 +5,6 @@
 </route-meta>
 <template>
   <div class="login bgwh">
-    <div class="wh pt60 pl15">
-      <p class="f36">英萌XSTAEM</p>
-      <p class="f18">欢迎您！</p>
-    </div>
     <div class="login-box pl30 pr30">
       <div>
         <q-input
@@ -17,7 +13,6 @@
           type="tel"
           maxlength="11"
           @input="errorTel=''"
-          @blur="checkphone"
         ></q-input>
         <p slot="bottom" class="login-warn f12">{{errorTel}}</p>
       </div>
@@ -38,8 +33,8 @@
       <div class="tc mt10">
         <yd-button
           class="login-btn wh b"
-          @click.native="submit"
-          bgcolor="rgba(73, 140, 234, 1)"
+          @click.native="login"
+          bgcolor="#0bb20c"
           :disabled="!data.mobileNumber||!data.messagecode"
           :loading="loading"
         >登 录</yd-button>
@@ -50,7 +45,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from "vue-property-decorator";
-import { sendCode, login, getSystemId, checkphone } from "@/apis/login";
+import { sendCode, login } from "@/apis/login";
 import { session } from "@/utils/store";
 import qInput from "@/components/qInput.vue";
 interface D {
@@ -83,11 +78,6 @@ export default class ComponentName extends Vue {
       }
     }, 1000);
   }
-  async submit() {
-    if (this.checkphone()) {
-      this.login();
-    }
-  }
   checkphone() {
     if (this.data.mobileNumber === "") {
       this.errorTel = "请输入手机号码";
@@ -112,37 +102,34 @@ export default class ComponentName extends Vue {
     }
     this.loading = true;
     try {
-      let { user_info, access_token } = await login(this.data);
+      // let { user_info, access_token } = await login(this.data);
+      let user_info = {
+        id: 1,
+        account: 'vincent',
+        name: 'vincent',
+        mobile: 13800000000,
+        gender: '1',
+      }
+      let access_token = '123456'
       session.set("userInfo", user_info);
       session.set("access_token", access_token);
-      let syslist = await getSystemId(user_info.id);
-      let auth = syslist.some(({ code }) => code === "boss-admin");
-      if (auth) {
-        this.$dialog.toast({
-          mes: "登录成功",
-          timeout: 1000,
-          icon: "success",
-          callback: () => {
-            document.body.scrollTop = 0;
-            this.$router.replace("/dash");
-          }
-        });
-      } else {
-        this.$dialog.toast({
-          mes: "暂无权限！",
-          timeout: 1500,
-          icon: "error"
-        });
-      }
+      this.$dialog.toast({
+        mes: "登录成功",
+        timeout: 1000,
+        icon: "success",
+        callback: () => {
+          document.body.scrollTop = 0;
+          this.$router.replace("/");
+        }
+      });
     } catch (error) {
       console.log(error);
     }
     this.loading = false;
   }
   async sendCode() {
-    // await checkphone(this.data.mobileNumber);
     if (this.checkphone()) {
-      await sendCode(this.data.mobileNumber);
+      // await sendCode(this.data.mobileNumber);
       this.setTime();
       this.$dialog.toast({
         mes: "短信发送成功",
@@ -159,21 +146,16 @@ export default class ComponentName extends Vue {
 
 <style lang="scss" scoped>
 .login {
-  background-image: url("../assets/images/loginbg.png");
-  background-repeat: no-repeat;
-  background-size: 100%;
   height: 100vh;
-  position: relative;
   &-box {
-    position: absolute;
-    top: 270px;
+    padding-top: 200px;
     width: 100%;
   }
   &-btn {
     font-size: 16px;
     width: 184px;
     height: 44px;
-    box-shadow: 0px 3px 4px 0px rgba(41, 165, 229, 0.26);
+    box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.13);
     border-radius: 4px;
   }
   &-warn {
@@ -182,10 +164,10 @@ export default class ComponentName extends Vue {
   }
 }
 .code {
-  color: #0079ff;
+  color: #0bb20c;
 }
 .mins {
   font-weight: 500;
-  color: rgba(73, 140, 234, 0.5);
+  color: #0bb20c;
 }
 </style>
