@@ -1,24 +1,39 @@
 <template>
   <div id="app">
-    <nv-loading :loading="isLoading"></nv-loading>
-    <router-view v-wechat-title="$route.meta.title" v-show="!isLoading"/>
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </div>
+    <router-view/>
+    <button @click="increase" data-qa="increase">增加</button>
+    <button @click="decrease" data-aq="decrease">减少</button>
+    <count></count>
   </div>
 </template>
-<script>
-import nvLoading from '@/components/loading.vue'
-export default {
+<script lang="ts">
+import {Component, Vue} from 'vue-property-decorator';
+import count from '@/components/count.vue'
+
+@Component({
   components:{
-    nvLoading
-  },
-  computed: {
-    isLoading() {
-      return this.$store.state.isLoading;
-    }
+    count
   }
-};
+})
+export default class App extends Vue{
+  increase() {
+    this.$store.dispatch('increaseCount')
+  }
+  decrease() {
+    this.$store.dispatch('decreaseCount')
+  }
+}
 </script>
-
-<style  lang="scss">
-@import "./assets/styles/index.scss";
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
 </style>
-
