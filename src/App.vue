@@ -1,39 +1,28 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
     <router-view/>
-    <button @click="increase" data-qa="increase">增加</button>
-    <button @click="decrease" data-aq="decrease">减少</button>
-    <count></count>
   </div>
 </template>
-<script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
-import count from '@/components/count.vue'
 
-@Component({
-  components:{
-    count
-  }
-})
-export default class App extends Vue{
-  increase() {
-    this.$store.dispatch('increaseCount')
-  }
-  decrease() {
-    this.$store.dispatch('decreaseCount')
-  }
-}
-</script>
-<style>
+<style lang="scss">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+#nav {
+  padding: 30px;
+
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
 }
 </style>

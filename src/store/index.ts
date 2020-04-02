@@ -1,30 +1,19 @@
-import Vue from 'vue';
-import Vuex, { StoreOptions, ActionContext} from 'vuex';
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-Vue.use(Vuex);
-interface State {
-  count: number;
-}
-const store:StoreOptions<State> = {
-  state:{
-    count: 0
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+  state: {
+    token:'123'
   },
-  mutations:{
-    setCount(state:State, count:number){
-      state.count = count;
-    }
+  mutations: {
   },
-  actions:{
-    increaseCount({state,commit}:ActionContext<State, State>){
-      commit('setCount', state.count +1);
-    },
-    decreaseCount({state,commit}:ActionContext<State, State>){
-      commit('setCount', state.count -1);
-    }
+  actions: {
+  },
+  modules: {
   },
   getters:{
-    count: (state:State) => state.count
+    token : (state :any)=>state.token
   }
-}
-
-export default new Vuex.Store(store);
+})
