@@ -8,5 +8,5 @@ declare module 'vue/types/vue' {
 
 @Component
 export default class myMixins extends Vue {
-    value: string = 'Hello'
+    value = 'Hello'
 }

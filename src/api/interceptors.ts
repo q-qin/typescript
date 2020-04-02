@@ -1,25 +1,34 @@
-import axios from 'axios';
+import $qs from 'qs';
 import store from '@/store';
-import { AxiosResponse, AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 
-const $axios = axios.create({timeout: 1000 * 5});
+const $axios = axios.create({ timeout: 1000 * 5 });
 
 $axios.interceptors.request.use((config: AxiosRequestConfig) => {
+  config.headers.Accept = '*/*';
+  config.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+  config.method === 'post'
+    ? config.data = $qs.stringify({ ...config.data })
+    : config.params = { ...config.data };
+  if (store.getters.token) {
+    config.headers.Authorization = `Bearer ${store.getters.token}`;
+  }
   return config;
-}, (error: any) => {
+}, (error: AxiosError) => {
   Promise.reject(error);
 });
 
 $axios.interceptors.response.use(
-(response: AxiosResponse) => {
+  (response: AxiosResponse) => {
     if (response.status !== 200) {
-        console.error('error');
+      console.error('error');
     } else {
-        return response.data;
+      return response.data;
     }
-},
-(error: any) => {
-    return Promise.reject(error);
-});
+  },
 
-export default $axios
+  (error: AxiosError) => {
+    return Promise.reject(error);
+  });
+
+export default $axios;

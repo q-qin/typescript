@@ -1,5 +1,5 @@
-import request from './request'
+import request from './request';
 
-export function login(data:object){
-  return request.get('/login',data)
+export function login (data: object) {
+  return request.post('/login', data);
 }

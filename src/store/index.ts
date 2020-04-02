@@ -1,11 +1,11 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    token:'123'
+    token: '123'
   },
   mutations: {
   },
@@ -13,7 +13,7 @@ export default new Vuex.Store({
   },
   modules: {
   },
-  getters:{
-    token : (state :any)=>state.token
+  getters: {
+    token: (state: any) => state.token
   }
-})
+});
