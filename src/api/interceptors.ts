@@ -1,8 +1,13 @@
 import $qs from 'qs';
 import store from '@/store';
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
+const baseURL = process.env.VUE_APP_BASE_API;
 
-const $axios = axios.create({ timeout: 1000 * 5 });
+const $axios = axios.create({
+  baseURL,
+  // withCredentials: true, // send cookies when cross-domain requests
+  timeout: 1000 * 5
+});
 
 $axios.interceptors.request.use((config: AxiosRequestConfig) => {
   config.headers.Accept = '*/*';

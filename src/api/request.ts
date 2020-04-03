@@ -1,5 +1,4 @@
 import $axios from './interceptors';
-const BASE_URL = process.env.VUE_APP_BASE_API;
 
 class ApiRequest {
   // constructor () {}
@@ -8,15 +7,15 @@ class ApiRequest {
     return $axios(options);
   }
 
-  public static get (url: string, data: object, options: any = {}) {
-    options.url = BASE_URL + url;
+  public static get (url: string, data: object, options: any) {
+    options.url = url;
     options.data = data;
     options.method = 'GET';
     return this.axios(options);
   }
 
   public static post (url: string, data: object, options: any = {}) {
-    options.url = BASE_URL + url;
+    options.url = url;
     options.data = data;
     options.method = 'POST';
     return this.axios(options);

@@ -9,12 +9,12 @@
 <script lang='ts'>
 import { Component, Vue, Watch, Emit } from 'vue-property-decorator';
 import HelloWorld from '@/components/HelloWorld.vue';
-import myMixins from '@/mixins';
+import MyMixins from '@/mixins';
 import { login } from '@/api/user';
 
 @Component({
   components: { HelloWorld },
-  mixins: [myMixins]
+  mixins: [MyMixins]
 })
 export default class Home extends Vue {
   msg = 'helloworld';

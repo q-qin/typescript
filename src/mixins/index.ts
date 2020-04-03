@@ -7,6 +7,6 @@ declare module 'vue/types/vue' {
 }
 
 @Component
-export default class myMixins extends Vue {
+export default class MyMixins extends Vue {
     value = 'Hello'
 }
