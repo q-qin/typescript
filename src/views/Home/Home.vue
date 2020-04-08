@@ -54,7 +54,6 @@ export default class Home extends Vue {
       phone: this.phone,
       password: this.password
     });
-    debugger;
   }
 }
 </script>
