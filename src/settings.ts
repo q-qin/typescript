@@ -1,3 +1,3 @@
 export default {
-  title: '标题'
+  title: '3keji.com - 3颗榕树'
 };
