@@ -1,62 +1,60 @@
 <template>
   <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Child :msg="phone" @callback="callback" />
     {{getcount}}{{msg}}
-    <input v-model="text">
+    <div>
+      <input v-model="phone" type="text">
+      <input type="password" v-model="password">
+      <div @click="login">登 录</div>
+    </div>
   </div>
 </template>
 
 <script lang='ts'>
-import { Component, Vue, Watch, Emit } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue';
+import { Component, Vue, Watch } from 'vue-property-decorator';
+import Child from '@/components/Child.vue';
 import MyMixins from '@/mixins';
 import { login } from '@/api/user';
 
 @Component({
-  components: { HelloWorld },
+  components: { Child },
   mixins: [MyMixins]
 })
 export default class Home extends Vue {
   msg = 'helloworld';
   count = 0;
-  text = '';
+  phone = '';
+  password = '';
 
   private created () {
     console.log('getter:', this.$store.getters.token);
-    this.$on('emit-todo', (n: string) => {
-      this.count++;
-      console.log('emit-todo', n);
-    });
-    this.$on('reset', (n: string) => {
-      console.log('emit-reset', n);
-    });
-
-    this.todo('todo');
+    // 混入数据
     console.log(this.value);
-    login({ a: 1 });
   }
 
+  // 监听
+  @Watch('phone')
+  onChangeValue (newVal: string, oldVal: string) {
+    console.log(newVal, oldVal);
+  }
+
+  // 回调子组件事件
+  callback (n: object) {
+    console.log('callback', n);
+  }
+
+  // computed
   get getcount () {
     return this.count + 1;
   }
 
-  @Emit('reset')
-
-  @Emit()
-  emitTodo (n: string) {
-    this.count++;
-    console.log('emitTodo hello', n);
-  }
-
-  todo (str: string) {
-    this.count++;
-    console.log(str);
-    this.emitTodo('world');
-  }
-
-  @Watch('text')
-  onChangeValue (newVal: string, oldVal: string) {
-    console.log(newVal, oldVal);
+  // 登录
+  async login () {
+    const data = await this.$store.dispatch('user/login', {
+      phone: this.phone,
+      password: this.password
+    });
+    debugger;
   }
 }
 </script>
