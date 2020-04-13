@@ -1,6 +1,6 @@
 <template>
-  <div>
-    这是列表页
+  <div class="list">
+    <h1>This is an list page</h1>
   </div>
 </template>
 <script lang="ts">
