@@ -15,3 +15,8 @@ export function setToken (value: string) {
   }
   return Cookies.set(KEY_TOKEN, value);
 }
+
+// 清理token
+export function clearToken () {
+  Cookies.remove(KEY_TOKEN);
+}

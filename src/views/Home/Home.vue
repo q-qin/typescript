@@ -16,20 +16,24 @@ import Child from '@/components/Child.vue';
 import MyMixins from '@/mixins';
 import { login } from '@/api/user';
 
+// components + mixins
 @Component({
   components: { Child },
   mixins: [MyMixins]
 })
 export default class Home extends Vue {
+  // data
   msg = 'helloworld';
   count = 0;
   phone = '';
   password = '';
 
+  // created
   private created () {
     console.log('getter:', this.$store.getters.token);
-    // 混入数据
+    // mixins混入数据，可以做搜索条件
     console.log(this.value);
+    console.log(this.foo('bar'));
   }
 
   // 监听
@@ -41,6 +45,11 @@ export default class Home extends Vue {
   // 回调子组件事件
   callback (n: object) {
     console.log('callback', n);
+  }
+
+  foo (name: string): string {
+    const a: Array<string> = ['100', '200'];
+    return name + a.join(',');
   }
 
   // computed
@@ -55,7 +64,8 @@ export default class Home extends Vue {
       password: this.password
     });
   }
-}
+};
+
 </script>
 <style lang="scss" scoped>
   .home{

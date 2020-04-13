@@ -1,6 +1,6 @@
 module.exports = {
   publicPath: '/',
-  outputDir: 'webApp',
+  outputDir: 'dist',
   pages: {
     index: {
       // page 的入口

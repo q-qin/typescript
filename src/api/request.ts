@@ -1,11 +1,5 @@
 import $axios from './interceptors';
 
-interface Options {
-  url: string;
-  data?: object;
-  method: string;
-}
-
 class ApiRequest {
   // constructor () {}
 
@@ -13,18 +7,24 @@ class ApiRequest {
     return $axios(options);
   }
 
-  public static get (url: string, data: object, options: Options) {
-    options.url = url;
-    options.data = data;
-    options.method = 'GET';
-    return this.axios(options);
+  public static get (url: string, data: object, options: object = {}) {
+    const axiosOptions = {
+      url: url,
+      data: data,
+      method: 'GET',
+      ...options
+    };
+    return this.axios(axiosOptions);
   }
 
-  public static post (url: string, data: object, options: Options) {
-    options.url = url;
-    options.data = data;
-    options.method = 'POST';
-    return this.axios(options);
+  public static post (url: string, data: object, options: object = {}) {
+    const axiosOptions = {
+      url: url,
+      data: data,
+      method: 'POST',
+      ...options
+    };
+    return this.axios(axiosOptions);
   }
 }
 

@@ -1,4 +1,5 @@
 import { login } from '@/api/user';
+import { setToken, clearToken } from '@/utils/jscookie';
 
 const state = {
   token: '123'
@@ -12,11 +13,13 @@ const mutations = {
 const actions = {
   login ({ commit }: any, param: any) {
     return new Promise((resolve, reject) => {
-      // todo 清理缓存
+      // 清理cookie
+      clearToken();
       login(param).then((res: any) => {
-        // 保存缓存
-        commit('SET_TOKEN', param.phone);
-        // todo js-cookie
+        // 更新store
+        commit('SET_TOKEN', res.token);
+        // 保存cookie
+        setToken(res.token);
         resolve();
       }).catch((e: ExceptionInformation) => {
         reject(e);
