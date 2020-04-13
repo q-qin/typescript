@@ -4,8 +4,11 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Watch, Emit } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
+@Component
 export default class List extends Vue {
-
+  private created () {
+    console.log('List');
+  }
 }
 </script>
