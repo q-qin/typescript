@@ -1,12 +1,16 @@
 import { login } from '@/api/user';
 import { setToken, clearToken } from '@/utils/jscookie';
 
+export interface State{
+  token: string;
+}
+
 const state = {
   token: '123'
 };
 
 const mutations = {
-  SET_TOKEN: (state: any, token: string) => {
+  SET_TOKEN: (state: State, token: string) => {
     state.token = token;
   }
 };
