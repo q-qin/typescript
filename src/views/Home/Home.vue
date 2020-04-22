@@ -48,8 +48,8 @@ export default class Home extends Vue {
   }
 
   foo (name: string): string {
-    const a: Array<string> = ['100', '200'];
-    return name + a.join(',');
+    const bar: Array<string|boolean|number> = ['100', '200', true, 500];
+    return name + bar.join(',');
   }
 
   // computed

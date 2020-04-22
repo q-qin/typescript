@@ -7,7 +7,12 @@
 import Vue from 'vue';
 export default Vue.extend({
   created () {
-    console.log('About');
+    this.test();
+  },
+  methods: {
+    test () {
+      console.log('About');
+    }
   }
 });
 </script>

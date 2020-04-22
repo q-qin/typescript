@@ -1,12 +1,12 @@
 import { login } from '@/api/user';
-import { setToken, clearToken } from '@/utils/jscookie';
+import { setToken, clearToken, getToken } from '@/utils/jscookie';
 
 export interface State{
   token: string;
 }
 
 const state = {
-  token: '123'
+  token: getToken() || '123'
 };
 
 const mutations = {
