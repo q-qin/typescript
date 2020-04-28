@@ -1,12 +1,15 @@
 <template>
   <div class="home">
     <Child :msg="phone" @callback="callback" />
-    {{getcount}}{{msg}}
-    <div>
-      <input v-model="phone" type="text">
-      <input type="password" v-model="password">
-      <div @click="login">登 录</div>
-    </div>
+    <KView>{{getcount}}{{msg}}</KView>
+    <KView>
+      <KInput label="手机号" v-model="phone" placeholder="手机号" clearable/>
+      <KInput label="密码" type="password" v-model="password" placeholder="密码" clearable/>
+      <KButton type="primary" @click="login">登 录</KButton>
+      <router-link to="/list">
+        <KButton type="warn" >去列表页</KButton>
+      </router-link>
+    </KView>
   </div>
 </template>
 
