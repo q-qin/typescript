@@ -18,6 +18,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator';
 import Child from '@/components/Child.vue';
 import MyMixins from '@/mixins';
 import { login } from '@/api/user';
+import tcb from 'tcb-js-sdk';
 
 // components + mixins
 @Component({
@@ -32,11 +33,26 @@ export default class Home extends Vue {
   password = '';
 
   // created
-  private created () {
+  private async created () {
     console.log('getter:', this.$store.getters.token);
     // mixins混入数据，可以做搜索条件
     console.log(this.value);
     console.log(this.foo('bar'));
+    const app = tcb.init({
+      env: 'tclodubase-140254'
+    });
+    const auth = app.auth();
+    await auth.signInAnonymously();
+    // const loginState = await auth.getLoginState();
+    // console.log(loginState);
+    // ***云函数***
+    const res = await app.callFunction({ name: 'collection_get', data: { database: 'all_goods' } });
+    console.log('云函数,返回 --> ', res);
+    // ***云数据库***
+    // 1.获取数据库引用
+    const db = app.database();
+    const list = await db.collection('all_goods').where({}).get();
+    console.log('云数据库,返回 --> ', list);
   }
 
   // 监听

@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <KView>{{ msg }}</KView>
     <a @click="handleToParent">点击传送给父组件</a>
   </div>
 </template>
