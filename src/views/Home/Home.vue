@@ -42,14 +42,14 @@ export default class Home extends Vue {
       env: 'tclodubase-140254'
     });
     const auth = app.auth();
+    // ***用户信息***
     await auth.signInAnonymously();
-    // const loginState = await auth.getLoginState();
-    // console.log(loginState);
+    const loginState = await auth.getLoginState();
+    console.log('auth,返回 --> ', loginState);
     // ***云函数***
-    const res = await app.callFunction({ name: 'collection_get', data: { database: 'all_goods' } });
+    const res = await app.callFunction({ name: 'collection_get', data: { database: 'all_goods',title:'将进酒'} });
     console.log('云函数,返回 --> ', res);
     // ***云数据库***
-    // 1.获取数据库引用
     const db = app.database();
     const list = await db.collection('all_goods').where({}).get();
     console.log('云数据库,返回 --> ', list);
