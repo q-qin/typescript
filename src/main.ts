@@ -4,10 +4,10 @@ import router from './router';
 import store from '@/store';
 import '@/styles/index.scss';
 import '@/permission'; // permission control
-import KboneUI from 'kbone-ui';
-import 'kbone-ui/lib/weui/weui.css';
+import Vant from 'vant';
+import 'vant/lib/index.css';
 
-Vue.use(KboneUI);
+Vue.use(Vant);
 Vue.config.productionTip = false;
 
 new Vue({

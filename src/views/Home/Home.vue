@@ -1,15 +1,15 @@
 <template>
   <div class="home">
     <Child :msg="phone" @callback="callback" />
-    <KView>{{getcount}}{{msg}}</KView>
-    <KView>
-      <KInput label="手机号" v-model="phone" placeholder="手机号" clearable/>
-      <KInput label="密码" type="password" v-model="password" placeholder="密码" clearable/>
-      <KButton type="primary" @click="login">登 录</KButton>
+    <div>{{getcount}}{{msg}}</div>
+    <div>
+      <van-field v-model="phone" label="用户名" placeholder="用户名" clearable />
+      <van-field v-model="password" type="password" label="密码" placeholder="密码" clearable />
+      <van-button type="primary" block @click="login">登 录</van-button>
       <router-link to="/list">
-        <KButton type="warn" >去列表页</KButton>
+        <van-button type="warning" block>去列表页</van-button>
       </router-link>
-    </KView>
+    </div>
   </div>
 </template>
 
@@ -20,6 +20,9 @@ import MyMixins from '@/mixins';
 import { login } from '@/api/user';
 import tcb from 'tcb-js-sdk';
 
+const app = tcb.init({
+  env: 'tclodubase-140254'
+});
 // components + mixins
 @Component({
   components: { Child },
@@ -38,21 +41,21 @@ export default class Home extends Vue {
     // mixins混入数据，可以做搜索条件
     console.log(this.value);
     console.log(this.foo('bar'));
-    const app = tcb.init({
-      env: 'tclodubase-140254'
-    });
     const auth = app.auth();
-    // ***用户信息***
+    // // ***用户信息***
     await auth.signInAnonymously();
     const loginState = await auth.getLoginState();
     console.log('auth,返回 --> ', loginState);
     // ***云函数***
-    const res = await app.callFunction({ name: 'collection_get', data: { database: 'all_goods',title:'将进酒'} });
-    console.log('云函数,返回 --> ', res);
+    const param: any = {
+      name: 'collection_get', data: { database: 'all_goods', title: '将进酒' }
+    };
+    const { result } = await app.callFunction(param);
+    console.log('云函数,返回 --> ', result);
     // ***云数据库***
     const db = app.database();
-    const list = await db.collection('all_goods').where({}).get();
-    console.log('云数据库,返回 --> ', list);
+    const { data } = await db.collection('all_goods').where({}).get();
+    console.log('云数据库,返回 --> ', data);
   }
 
   // 监听
@@ -78,10 +81,19 @@ export default class Home extends Vue {
 
   // 登录
   async login () {
-    const data = await this.$store.dispatch('user/login', {
-      phone: this.phone,
-      password: this.password
-    });
+    // const data = await this.$store.dispatch('user/login', {
+    //   phone: this.phone,
+    //   password: this.password
+    // });
+    const param: any = {
+      name: 'func_login', data: { name: this.phone, password: this.password }
+    };
+    const { result } = await app.callFunction(param);
+    if (result.code === 200) {
+      this.$toast('登录成功了');
+    } else {
+      this.$toast(result.msg);
+    }
   }
 };
 

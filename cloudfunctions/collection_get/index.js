@@ -3,12 +3,15 @@ tcb.init({
   env: tcb.getCurrentEnv() // 示例使用客户端所使用的环境ID，可以手动指定
 });
 const db = tcb.database();
-const _ = db.command;
 exports.main = async (event, context) => {
-  console.log(`[event]：${JSON.stringify(event)},[context]：${JSON.stringify(context)}`);
-  return await db.collection(event.database)
+  const data = await db.collection(event.database)
     .where({
       title: event.title || ''
     })
     .get();
+  return {
+    code: 200,
+    data: data.data,
+    msg: '操作成功'
+  };
 };
