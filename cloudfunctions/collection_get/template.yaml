@@ -1,0 +1,19 @@
+Resources:
+  tclodubase-140254:
+    Type: TencentCloud::Serverless::Namespace
+    collection_get:
+      Properties:
+        CodeUri: .
+        Description: 获取数据库的数据
+        Environment:
+          Variables: {}
+        Events: {}
+        Handler: index.main
+        MemorySize: 256
+        Role: TCB_QcsRole
+        Runtime: Nodejs8.9
+        Timeout: 20
+        VpcConfig:
+          SubnetId: ''
+          VpcId: ''
+      Type: TencentCloud::Serverless::Function
