@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <Child :msg="phone" @callback="callback" />
+    这是web首页
+    <!-- <Child :msg="phone" @callback="callback" />
     <KView>{{getcount}}{{msg}}</KView>
     <KView>
       <KInput label="手机号" v-model="phone" placeholder="手机号" clearable/>
@@ -9,7 +10,7 @@
       <router-link to="/list">
         <KButton type="warn" >去列表页</KButton>
       </router-link>
-    </KView>
+    </KView> -->
   </div>
 </template>
 
@@ -72,6 +73,7 @@ export default class Home extends Vue {
 </script>
 <style lang="scss" scoped>
   .home{
-    font-size: 12px;
+    text-align: center;
+    line-height: 100px;
   }
 </style>
